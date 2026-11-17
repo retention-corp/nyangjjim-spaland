@@ -1,0 +1,12 @@
+<!doctype html><html><head><meta charset="utf-8"><style>html,body{margin:0;width:512px;height:512px;overflow:hidden}</style></head><body><canvas id="c" width="512" height="512"></canvas><script>
+const k=location.hash.slice(1);const g=c.getContext('2d');
+const S={vip:['#2A2440','#F2C230','VIP','회원권'],double:['#3D8BFD','#FFFFFF','x2','냥전 2배'],style:['#F2689A','#FFFFFF','✿','스타일 팩'],c100:['#FFF3D6','#B98310','100','냥전 한 줌'],c550:['#FFE2A8','#8A5A00','550','냥전 주머니'],c1500:['#F5C334','#5A3B00','1500','냥전 금고']}[k];
+g.fillStyle=S[0];g.fillRect(0,0,512,512);
+function coin(x,y,r){g.fillStyle='#F5C334';g.beginPath();g.arc(x,y,r,0,7);g.fill();g.lineWidth=r*.1;g.strokeStyle='#C8951A';g.stroke();g.fillStyle='#E09B12';g.beginPath();g.moveTo(x-r*.4,y);g.lineTo(x-r*.34,y-r*.42);g.lineTo(x-r*.12,y-r*.22);g.lineTo(x+r*.12,y-r*.22);g.lineTo(x+r*.34,y-r*.42);g.lineTo(x+r*.4,y);g.quadraticCurveTo(x+r*.4,y+r*.4,x,y+r*.4);g.quadraticCurveTo(x-r*.4,y+r*.4,x-r*.4,y);g.fill();g.fillStyle='#5a3b00';g.beginPath();g.arc(x-r*.15,y+r*.02,r*.05,0,7);g.arc(x+r*.15,y+r*.02,r*.05,0,7);g.fill();}
+function towel(x,y,s,col){g.fillStyle=col;g.strokeStyle='rgba(0,0,0,.18)';g.lineWidth=6;g.beginPath();g.ellipse(x,y,s,s*.45,0,Math.PI,0);g.fill();g.stroke();[-1,1].forEach(d=>{g.beginPath();g.arc(x+d*s*.95,y,s*.35,0,7);g.fill();g.stroke();g.beginPath();for(let a=0;a<12;a+=.25){const r=a*s*.025;g.lineTo(x+d*s*.95+Math.cos(a)*r,y+Math.sin(a)*r)}g.stroke();});}
+if(k.startsWith('c')){const n={c100:1,c550:3,c1500:6}[k];const pos=[[256,230,120],[170,250,90],[340,250,90],[256,170,90],[150,170,70],[362,170,70]];for(let i=n-1;i>=0;i--)coin(...pos[i]);}
+else if(k==='vip'){towel(256,230,130,'#F2C230');}
+else if(k==='double'){coin(200,220,110);coin(310,250,110);}
+else if(k==='style'){towel(256,230,130,'#FFFFFF');}
+g.fillStyle=S[1];g.textAlign='center';g.font='900 92px "Apple SD Gothic Neo"';g.fillText(S[2],256,k.startsWith('c')?395:390);g.font='800 54px "Apple SD Gothic Neo"';g.fillText(S[3],256,465);
+</script></body></html>
